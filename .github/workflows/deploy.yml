@@ -26,6 +26,10 @@ jobs:
     name: Provision & Deploy
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      id-token: write
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -37,10 +41,7 @@ jobs:
         with:
           workload_identity_provider: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ vars.GCP_SERVICE_ACCOUNT_EMAIL }}
-        permissions:
-          contents: read
-          id-token: write
-
+        
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
         with:
